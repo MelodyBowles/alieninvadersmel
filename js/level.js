@@ -6,7 +6,7 @@
 //can add levels with aliens in different places
 //can add more numbers to array for more aliens
 var levelData = { 
-     1:  [[0,2,0,0,1,0,0,0,0,0,0],
+     1:  [[0,2,0,0,1,0,0,1,0,0,0],
           [0,0,0,0,0,0,0,0,2,0,0],
           [0,0,0,2,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,1,0,0,0],
