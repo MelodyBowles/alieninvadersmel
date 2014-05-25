@@ -76,7 +76,7 @@ Alien.prototype.step = function(dt) {
     this.x += this.mx;
     this.mx = 0;
       //changes no. of sprites displayed
-    this.frame = (this.frame+1) % 2;
+    this.frame = (this.frame+1) % 3;
     if(this.x > Game.width - Sprites.map.alien1.w * 2) this.flock.hit = -1;
     if(this.x < Sprites.map.alien1.w) this.flock.hit = 1;
   }

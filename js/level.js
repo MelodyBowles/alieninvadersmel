@@ -30,12 +30,11 @@ var levelData = {
           [0,0,1,1,1,1,1,1,1,1,0]] };
 
 //pairs of names and values for spriteys locations on the sprite sheet
-//this is a useful resource http://getspritexy.com/
   var spriteData = {
-    'alien1': { sx: 3,  sy: 3,  w: 55, h: 43, cls: Alien, frames: 2 },
-    'alien2': { sx: 5,  sy: 48, w: 57, h: 43, cls: Alien, frames: 2 },
-    'player': { sx: 2,  sy: 93, w: 55, h: 70, cls: Player },
-    'missile': { sx: 4,  sy: 167, w: 15,  h: 30, cls: Missile }
+    'alien1': { sx: 0,  sy: 0,  w: 23, h: 18, cls: Alien, frames: 3 },
+    'alien2': { sx: 0,  sy: 18, w: 23, h: 18, cls: Alien, frames: 3 },
+    'player': { sx: 0,  sy: 36, w: 26, h: 17, cls: Player },
+    'missile': { sx: 0,  sy: 86, w: 3,  h: 14, cls: Missile }
   }
 //this be the start screen
   function startGame() {
