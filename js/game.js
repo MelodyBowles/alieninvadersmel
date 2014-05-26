@@ -7,7 +7,7 @@ var AlienFlock = function AlienFlock() {
   this.dx = 10; this.dy = 0;
   this.hit = 1; this.lastHit = 0;
     //this changes how fast the aliens are moving and rate of shooty shooty
-  this.speed = 10;
+  this.speed = 5;
 
   this.draw = function() {};
 
@@ -61,7 +61,7 @@ Alien.prototype.draw = function(canvas) {
 Alien.prototype.die = function() {
   GameAudio.play('die');
     //aliens get faster by flock.speed no. upon death
-  this.flock.speed += 1;
+  this.flock.speed += 0.1;
   this.board.remove(this);
 }
 

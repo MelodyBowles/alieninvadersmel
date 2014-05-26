@@ -6,22 +6,14 @@
 //can add levels with aliens in different places
 //can add more numbers to array for more aliens
 var levelData = { 
-     1:  [[0,2,0,0,1,0,0,1,0,0,0],
-          [0,0,0,0,0,0,0,0,2,0,0],
-          [0,0,0,2,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,1,0,0,0],
+     1:  [[0,1,0,1,0,1,0,1,0,1,0],
+          [0,1,0,1,0,1,0,1,0,1,0],
+          [0,1,0,1,0,1,0,1,0,1,0],
+          [0,1,0,1,0,1,0,1,0,1,0],
+          [0,1,0,1,0,1,0,1,0,1,0],
           [0,0,0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,2,0,0,0],
-          [0,0,1,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,1,0,1,0,0],
-          [0,0,0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0,0,0],
-          [0,2,0,0,0,0,0,0,1,0,0]],
+          [0,0,0,0,0,0,0,0,0,0,0]],
      2:  [[0,0,0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0,0,0],
           [0,0,2,2,2,2,2,2,2,2,0],
           [0,0,2,2,2,2,2,2,2,2,0],
           [0,0,1,1,1,1,1,1,1,1,0],
@@ -32,14 +24,14 @@ var levelData = {
 //pairs of names and values for spriteys locations on the sprite sheet
 //this is a useful resource http://getspritexy.com/
   var spriteData = {
-    'alien1': { sx: 3,  sy: 3,  w: 55, h: 43, cls: Alien, frames: 2 },
-    'alien2': { sx: 5,  sy: 48, w: 57, h: 43, cls: Alien, frames: 2 },
-    'player': { sx: 2,  sy: 93, w: 55, h: 70, cls: Player },
-    'missile': { sx: 4,  sy: 167, w: 15,  h: 30, cls: Missile }
+    'alien1': { sx: 0,  sy: 2,  w: 61, h: 40, cls: Alien, frames: 2 },
+    'alien2': { sx: 1,  sy: 49, w: 64, h: 40, cls: Alien, frames: 2 },
+    'player': { sx: 6,  sy: 91, w: 90, h: 95, cls: Player },
+    'missile': { sx: 0,  sy: 195, w: 25,  h: 38, cls: Missile }
   }
 //this be the start screen
   function startGame() {
-    var screen = new GameScreen("Alien Invaders","press space to start",
+    var screen = new GameScreen("CloudBurst","press space to start",
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
                                  });
