@@ -3,7 +3,7 @@
 
 //change controls here see here for key codes //http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
 var Game = new function() {                                                                  
-  var KEY_CODES = { 37:'left', 39:'right', 32 :'fire', 38:'up', 40:'down'};
+  var KEY_CODES = { 37:'left', 39:'right', 32 :'fire'};
   this.keys = {};
 
   this.initialize = function(canvas_dom,level_data,sprite_data,callbacks) {
@@ -68,6 +68,8 @@ var GameScreen = function GameScreen(text,text2,callback) {
     canvas.font = "bold 20px arial";
     var measure2 = canvas.measureText(text2);
     canvas.fillText(text2,Game.width/2 - measure2.width/2,Game.height/2 + 40);
+
+
   };
 };
 
@@ -154,10 +156,12 @@ var GameBoard = function GameBoard(level_number) {
   };
 
   this.nextLevel = function() { 
-    return Game.level_data[level_number + 1] ? (level_number + 1) : false 
+    return Game.level_data[level_number + 1] ? (level_number + 1) : false
+
   };
  
   this.loadLevel(Game.level_data[level_number]);
+
 };
 
 var GameAudio = new function() {

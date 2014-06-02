@@ -19,7 +19,16 @@ var levelData = {
           [0,0,1,1,1,1,1,1,1,1,0],
           [0,0,1,1,1,1,1,1,1,1,0],
           [0,0,1,1,1,1,1,1,1,1,0],
-          [0,0,1,1,1,1,1,1,1,1,0]] };
+          [0,0,0,0,0,0,0,0,0,0,0]],
+     3:   [[0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,2,2,2,2,2,2,2,2,0],
+          [0,0,2,2,2,2,2,2,2,2,0],
+          [0,0,2,2,2,2,2,2,2,2,0],
+          [0,0,2,2,2,2,2,2,2,2,0],
+          [0,0,1,1,1,1,1,1,1,1,0],
+          [0,0,1,1,1,1,1,1,1,1,0]]
+              
+               };
 
 //pairs of names and values for spriteys locations on the sprite sheet
 //this is a useful resource http://getspritexy.com/
@@ -29,6 +38,8 @@ var levelData = {
     'player': { sx: 6,  sy: 91, w: 90, h: 95, cls: Player },
     'missile': { sx: 0,  sy: 195, w: 25,  h: 38, cls: Missile }
   }
+
+
 //this be the start screen
   function startGame() {
     var screen = new GameScreen("CloudBurst","press space to start",
