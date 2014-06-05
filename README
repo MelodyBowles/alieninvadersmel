@@ -1,4 +1,23 @@
+All code adapted from: www.github.com/cykod/AlienInvaders
+
 A Simple HTML5 Game To-be used in a Tutorial
 
 Slides up at:
 http://www.slideshare.net/cykod/html5-game-development-introduction-5815787
+
+Sound sources: Rain http://www.freesound.org/people/aesqe/sounds/37618/
+Comes with Creative Commons license
+	    
+
+Production notes:
+
+26/05/13- resolved repeated Permission denied (public key) github error. all my changes could only be viewed locally
+using git log. generated missing ssh key using online tutorial. all commits now logged online.
+
+29/05/13- laptop crashed. 
+no longer have access to Adobe Fireworks CS5.5 for editing the spritesheet. 
+(all html and css files recovered through github)
+
+
+
+

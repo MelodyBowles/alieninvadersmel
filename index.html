@@ -11,16 +11,28 @@
   <script src='js/engine.js'></script>
   <script src='js/game.js'></script>
   <script src='js/level.js'></script>
+  <link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
 
   <style>
-      #gameboard { background-image:url('images/level1.png');}
-      #game-wrapper { margin:0 auto; width: 1000px; }
+      @font-face{
+          font-family: 'Rokkitt', serif;
+          
+
+          }
+
+      #gameboard { background-image:url('images/levelan.gif');}  /*css styling- this line gives a background image url for the gameboard div */
+      #game-wrapper { margin:0 auto; width: 1000px; }            
   </style>
+
+  <audio autoplay loop>
+  <source src="media/rainloop.ogg" type="audio/ogg"> <!-- this autoplays and loops the background audio -->
+  </audio>
 
 </head>
 <body>
   <div id='game-wrapper'>
-    <canvas id='gameboard' width='1000' height='500'></canvas>
-  </div>
+    <canvas id='gameboard' width='1000' height='500'></canvas> <!-- change the size of the game here-500px is a little small for my laptop -->
+  </div>                                                       <!-- could you make it responsive via media queries? research -->
 </body>
 </html>

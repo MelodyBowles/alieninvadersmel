@@ -1,10 +1,19 @@
 //modified from
 //https://github.com/cykod/AlienInvaders
 
-//change controls here see here for key codes //http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
+//engine.js is where the game is built
+//it pulls in functions and data from both level.js and game.js
+//and it includes game loop
+//controls, collision, adding sprites, level setup, increasing levels, audio
+
+//change controls here 
+//see here for key codes //http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
+
 var Game = new function() {                                                                  
   var KEY_CODES = { 37:'left', 39:'right', 32 :'fire'};
   this.keys = {};
+
+  //initialise sets up the canvas and loads the level and sprite data
 
   this.initialize = function(canvas_dom,level_data,sprite_data,callbacks) {
     this.canvas_elem = $(canvas_dom)[0];
@@ -25,9 +34,12 @@ var Game = new function() {
     Sprites.load(sprite_data,this.callbacks['start']);
   };
 
+  //this loads the gameboard
+
   this.loadBoard = function(board) { Game.board = board; };
     
- //speed
+ //this function controls the speed of the step function
+ //it also sets a short timeout to Game.loop
   this.loop = function() { 
     Game.board.step(30/1000); 
     Game.board.render(Game.canvas);
@@ -35,7 +47,7 @@ var Game = new function() {
   };
 };
 
-//draws sprites
+//this loads the sprite data ready for drawing
 var Sprites = new function() {
   this.map = { }; 
 
@@ -43,8 +55,11 @@ var Sprites = new function() {
     this.map = sprite_data;
     this.image = new Image();
     this.image.onload = callback;
+//put spritesheet file in here
     this.image.src = 'images/spritesv2.png';
   };
+
+  //this draws the sprites
 
   this.draw = function(canvas,sprite,x,y,frame) {
     var s = this.map[sprite];
@@ -53,25 +68,34 @@ var Sprites = new function() {
   };
 }
 
-var GameScreen = function GameScreen(text,text2,callback) {
+//this sets up the gamescreen
+
+var GameScreen = function GameScreen(text,text2,text3,callback) {
   this.step = function(dt) {
     if(Game.keys['fire'] && callback) callback();
   };
 
-    //formatting stuffs
+//this formats the canvas
+//clearRect is neccessary for the loop to happen or sprites appear multiple times
   this.render = function(canvas) {
     canvas.clearRect(0,0,Game.width,Game.height);
-    canvas.font = "bold 40px arial";
+    canvas.font = "bold 40px Indie Flower";
     var measure = canvas.measureText(text);  
     canvas.fillStyle = "#FFFFFF";
-    canvas.fillText(text,Game.width/2 - measure.width/2,Game.height/2);
-    canvas.font = "bold 20px arial";
+    canvas.fillText(text,Game.width/2 - measure.width/2,Game.height/2 - 80);
+    canvas.font = "bold 20px Rokkitt";
     var measure2 = canvas.measureText(text2);
-    canvas.fillText(text2,Game.width/2 - measure2.width/2,Game.height/2 + 40);
+    canvas.fillText(text2,Game.width/2 - measure2.width/2,Game.height/2 + 20);
+    var measure3 = canvas.measureText(text3);
+    canvas.fillText(text3,Game.width/2 - measure2.width/2,Game.height/2 + 80);
+
 
 
   };
 };
+
+//this is the gameboard function
+//it needs level_number data
 
 var GameBoard = function GameBoard(level_number) {
   this.removed_objs = [];
@@ -79,8 +103,12 @@ var GameBoard = function GameBoard(level_number) {
   this.level = level_number;
   var board = this;
 
+  //ready to add missiles and remove enemies?
+
   this.add =    function(obj) { obj.board=this; this.objects.push(obj); return obj; };
   this.remove = function(obj) { this.removed_objs.push(obj); };
+
+  //for adding player, enemy and missiles
 
   this.addSprite = function(name,x,y,opts) {
     var sprite = this.add(new Sprites.map[name].cls(opts));
@@ -90,6 +118,8 @@ var GameBoard = function GameBoard(level_number) {
     sprite.h = Sprites.map[name].h;
     return sprite;
   };
+
+
   
 
   this.iterate = function(func) {
@@ -98,12 +128,15 @@ var GameBoard = function GameBoard(level_number) {
      }
   };
 
+
   this.detect = function(func) {
     for(var i = 0,val=null, len=this.objects.length; i < len; i++) {
       if(func.call(this.objects[i])) return this.objects[i];
     }
     return false;
   };
+
+  //this controls stepping of enemies/player
 
   this.step = function(dt) { 
     this.removed_objs = [];
@@ -117,16 +150,19 @@ var GameBoard = function GameBoard(level_number) {
     }
   };
 
+  //renders the canvas using the clearRect once again
   this.render = function(canvas) {
     canvas.clearRect(0,0,Game.width,Game.height);
     this.iterate(function() { this.draw(canvas); });
   };
 
-    //this keeps stuff moving back and forth across the screen? i.e so the sprites don't fall off     //the edge
+//this keeps stuff moving back and forth across the screen?
+//and maybe stops things falling of the screen
   this.collision = function(o1,o2) {
     return !((o1.y+o1.h-1<o2.y) || (o1.y>o2.y+o2.h-1) ||
              (o1.x+o1.w-1<o2.x) || (o1.x>o2.x+o2.w-1));
   };
+
 
   this.collide = function(obj) {
     return this.detect(function() {
@@ -134,7 +170,10 @@ var GameBoard = function GameBoard(level_number) {
        return board.collision(obj,this) ? this : false;
     });
   };
-//this makes up the level?? adds player and alien flocks
+
+
+//this function makes up the level
+//it adds player and alien flocks using the 'player' and 'alien' keys from level.js
   this.loadLevel = function(level) {
     this.objects = [];
     this.player = this.addSprite('player', // Sprite
@@ -155,6 +194,9 @@ var GameBoard = function GameBoard(level_number) {
     }
   };
 
+  //this function is used when the player clears a level
+  //+1 is added to the level number and it is then loaded
+
   this.nextLevel = function() { 
     return Game.level_data[level_number + 1] ? (level_number + 1) : false
 
@@ -164,11 +206,13 @@ var GameBoard = function GameBoard(level_number) {
 
 };
 
+//these functions all relate to the audio
+//maybe this ensures it plays according to function and that it doesn't just play once
+
 var GameAudio = new function() {
   this.load_queue = [];
   this.loading_sounds = 0;
   this.sounds = {};
-//audio channels??? something to do with audio
   var channel_max = 10;		
   audio_channels = new Array();
   for (a=0;a<channel_max;a++) {	
